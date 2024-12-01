@@ -8,22 +8,26 @@ const buttons = document.querySelectorAll('.app__card-button');
 const btnStartPause = document.querySelector('#start-pause');
 
 const soundFocusInput = document.querySelector('#toggle-music');
-const sound = new Audio('/sounds/luna-rise-part-one.mp3')
+const song = new Audio('/sounds/luna-rise-part-one.mp3')
+
+const soundBeep = new Audio('/sounds/beep.mp3')
+const soundPlay = new Audio('/sounds/play.wav')
+const soundPause = new Audio('/sounds/pause.mp3')
+
+
 
 let timeInSeconds = 5;
 let intervalId = null
 
-sound.loop = true;
+song.loop = true;
 
 soundFocusInput.addEventListener('change', () => {
-    if(sound.paused) {
-        sound.play()
+    if (song.paused) {
+        song.play()
     } else {
-        sound.pause()
+        song.pause()
     }
 })
-
-
 
 
 btnFocus.addEventListener('click', () => {
@@ -77,14 +81,29 @@ function changeContext(context) {
 }
 
 const timer = () => {
-    start()
+    if (timeInSeconds <= 0) {
+        soundBeep.play();
+        reset()
+        alert('Time finished!')
+        return
+    }
     timeInSeconds -= 1;
     console.log('Timer: ' + timeInSeconds);
 }
 
-btnStartPause.addEventListener('click', timer)
+btnStartPause.addEventListener('click', startOrPause)
 
-function start() {
+function startOrPause() {
+    if (intervalId) {
+        reset();
+        return
+    }
     intervalId = setInterval(timer, 1000)
+    soundPlay.play();
 }
 
+function reset() {
+    clearInterval(intervalId)
+    intervalId = null;
+    soundPause.play();
+}
