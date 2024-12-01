@@ -6,14 +6,14 @@ const banner = document.querySelector('.app__image');
 const title = document.querySelector('.app__title');
 const buttons = document.querySelectorAll('.app__card-button');
 const btnStartPause = document.querySelector('#start-pause');
-
 const soundFocusInput = document.querySelector('#toggle-music');
-const song = new Audio('/sounds/luna-rise-part-one.mp3')
+const btnStartOrPause = document.querySelector('#start-pause span');
+const iconStartOrPause = document.querySelector(".app__card-primary-button-icon")
 
+const song = new Audio('/sounds/luna-rise-part-one.mp3')
 const soundBeep = new Audio('/sounds/beep.mp3')
 const soundPlay = new Audio('/sounds/play.wav')
 const soundPause = new Audio('/sounds/pause.mp3')
-
 
 
 let timeInSeconds = 5;
@@ -83,8 +83,8 @@ function changeContext(context) {
 const timer = () => {
     if (timeInSeconds <= 0) {
         soundBeep.play();
-        reset()
         alert('Time finished!')
+        reset()
         return
     }
     timeInSeconds -= 1;
@@ -95,15 +95,20 @@ btnStartPause.addEventListener('click', startOrPause)
 
 function startOrPause() {
     if (intervalId) {
+        soundPause.play();
         reset();
         return
     }
-    intervalId = setInterval(timer, 1000)
     soundPlay.play();
+    intervalId = setInterval(timer, 1000)
+    btnStartOrPause.textContent = "Pause"
+    iconStartOrPause.setAttribute('src', `/img/pause.png`)
 }
 
 function reset() {
     clearInterval(intervalId)
+    btnStartOrPause.textContent = "Start"
+    iconStartOrPause.setAttribute('src', `/img/play_arrow.png`)
     intervalId = null;
-    soundPause.play();
+
 }
