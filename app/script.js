@@ -8,7 +8,9 @@ const buttons = document.querySelectorAll('.app__card-button');
 const btnStartPause = document.querySelector('#start-pause');
 const soundFocusInput = document.querySelector('#toggle-music');
 const btnStartOrPause = document.querySelector('#start-pause span');
-const iconStartOrPause = document.querySelector(".app__card-primary-button-icon")
+const iconStartOrPause = document.querySelector(".app__card-primary-button-icon");
+const timeOnScreen = document.querySelector('#timer');
+
 
 const song = new Audio('/sounds/luna-rise-part-one.mp3')
 const soundBeep = new Audio('/sounds/beep.mp3')
@@ -16,7 +18,7 @@ const soundPlay = new Audio('/sounds/play.wav')
 const soundPause = new Audio('/sounds/pause.mp3')
 
 
-let timeInSeconds = 5;
+let timeInSeconds = 1500;
 let intervalId = null
 
 song.loop = true;
@@ -31,21 +33,25 @@ soundFocusInput.addEventListener('change', () => {
 
 
 btnFocus.addEventListener('click', () => {
+    timeInSeconds = 1500
     changeContext('focus')
     btnFocus.classList.add('active')
 })
 
 btnShort.addEventListener('click', () => {
+    timeInSeconds = 300
     changeContext('short-break')
     btnShort.classList.add('active')
 })
 
 btnLong.addEventListener('click', () => {
+    timeInSeconds = 900
     changeContext('long-break')
     btnLong.classList.add('active')
 })
 
 function changeContext(context) {
+    showTimer()
     buttons.forEach(function (context) {
         context.classList.remove('active')
     })
@@ -88,7 +94,7 @@ const timer = () => {
         return
     }
     timeInSeconds -= 1;
-    console.log('Timer: ' + timeInSeconds);
+    showTimer()
 }
 
 btnStartPause.addEventListener('click', startOrPause)
@@ -112,3 +118,11 @@ function reset() {
     intervalId = null;
 
 }
+
+function showTimer() {
+    const time = new Date(timeInSeconds * 1000)
+    const formatedTime = time.toLocaleTimeString('pt-Br', {minute : '2-digit', second: '2-digit'})
+    timeOnScreen.innerHTML = `${formatedTime}`
+}
+
+showTimer();
