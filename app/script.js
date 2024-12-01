@@ -5,6 +5,7 @@ const btnLong = document.querySelector('.app__card-button--long');
 const timer = document.querySelector('#timer');
 const banner = document.querySelector('.app__image');
 const title = document.querySelector('.app__title');
+const buttons = document.querySelectorAll('.app__card-button');
 
 const focusDuration = 1500;
 const shortBreakDuration = 300;
@@ -13,23 +14,26 @@ const longBreakDuration = 900;
 
 btnFocus.addEventListener('click', () => {
     changeContext('focus')
+    btnFocus.classList.add('active')
 })
 
 btnShort.addEventListener('click', () => {
     changeContext('short-break')
-
-
+    btnShort.classList.add('active')
 })
 
 btnLong.addEventListener('click', () => {
     changeContext('long-break')
-
-
+    btnLong.classList.add('active')
 })
 
 function changeContext(context) {
+    buttons.forEach(function (context) {
+        context.classList.remove('active')
+    })
+
     const imagePath = `img/${context}.png`;
-    console.log("Image path:", imagePath); // Verifica o caminho no console
+    console.log("Image path:", imagePath);
     banner.setAttribute('src', imagePath);
 
 
