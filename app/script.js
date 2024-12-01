@@ -6,6 +6,17 @@ const timer = document.querySelector('#timer');
 const banner = document.querySelector('.app__image');
 const title = document.querySelector('.app__title');
 const buttons = document.querySelectorAll('.app__card-button');
+const soundFocusInput = document.querySelector('#toggle-music');
+const sound = new Audio('/sounds/luna-rise-part-one.mp3')
+sound.loop = true;
+
+soundFocusInput.addEventListener('change', () => {
+    if(sound.paused) {
+        sound.play()
+    } else {
+        sound.pause()
+    }
+})
 
 const focusDuration = 1500;
 const shortBreakDuration = 300;
