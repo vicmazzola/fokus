@@ -2,12 +2,17 @@ const html = document.querySelector('html');
 const btnFocus = document.querySelector('.app__card-button--focus');
 const btnShort = document.querySelector('.app__card-button--short');
 const btnLong = document.querySelector('.app__card-button--long');
-const timer = document.querySelector('#timer');
 const banner = document.querySelector('.app__image');
 const title = document.querySelector('.app__title');
 const buttons = document.querySelectorAll('.app__card-button');
+const btnStartPause = document.querySelector('#start-pause');
+
 const soundFocusInput = document.querySelector('#toggle-music');
 const sound = new Audio('/sounds/luna-rise-part-one.mp3')
+
+let timeInSeconds = 5;
+let intervalId = null
+
 sound.loop = true;
 
 soundFocusInput.addEventListener('change', () => {
@@ -18,9 +23,7 @@ soundFocusInput.addEventListener('change', () => {
     }
 })
 
-const focusDuration = 1500;
-const shortBreakDuration = 300;
-const longBreakDuration = 900;
+
 
 
 btnFocus.addEventListener('click', () => {
@@ -73,6 +76,15 @@ function changeContext(context) {
     }
 }
 
-timer.addEventListener('click', () => {
+const timer = () => {
+    start()
+    timeInSeconds -= 1;
+    console.log('Timer: ' + timeInSeconds);
+}
 
-})
+btnStartPause.addEventListener('click', timer)
+
+function start() {
+    intervalId = setInterval(timer, 1000)
+}
+
