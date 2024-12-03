@@ -18,7 +18,7 @@ const soundPlay = new Audio('/sounds/play.wav')
 const soundPause = new Audio('/sounds/pause.mp3')
 
 
-let timeInSeconds = 1500;
+let timeInSeconds = 30;
 let intervalId = null
 
 song.loop = true;
@@ -33,19 +33,19 @@ soundFocusInput.addEventListener('change', () => {
 
 
 btnFocus.addEventListener('click', () => {
-    timeInSeconds = 1500
+    timeInSeconds = 30
     changeContext('focus')
     btnFocus.classList.add('active')
 })
 
 btnShort.addEventListener('click', () => {
-    timeInSeconds = 300
+    timeInSeconds = 5
     changeContext('short-break')
     btnShort.classList.add('active')
 })
 
 btnLong.addEventListener('click', () => {
-    timeInSeconds = 900
+    timeInSeconds = 15
     changeContext('long-break')
     btnLong.classList.add('active')
 })
@@ -57,7 +57,6 @@ function changeContext(context) {
     })
 
     const imagePath = `img/${context}.png`;
-    console.log("Image path:", imagePath);
     banner.setAttribute('src', imagePath);
 
 
@@ -73,7 +72,7 @@ function changeContext(context) {
 
         case 'short-break':
             title.innerHTML =
-                `How about take a break? 
+                `How about taking a break? 
                 <strong class="app__title-strong">Take a short break!</strong>`
             break;
         case 'long-break':
