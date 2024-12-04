@@ -295,6 +295,7 @@ h1, h2, h3, h4, h5, h6 {
     margin-bottom: 4rem;
 }
 
+
 .app__form-textarea {
     width: 100%;
     border-radius: 0.8rem;
@@ -307,6 +308,10 @@ h1, h2, h3, h4, h5, h6 {
     color: var(--deep-blue);
     font-family: 'Unbounded', serif;
     font-size: 2.6rem;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 120%;
+
     display: block;
     margin-bottom: 3.2rem;
 }
