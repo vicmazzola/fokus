@@ -120,7 +120,7 @@ function reset() {
 
 function showTimer() {
     const time = new Date(timeInSeconds * 1000)
-    const formatedTime = time.toLocaleTimeString('pt-Br', {minute : '2-digit', second: '2-digit'})
+    const formatedTime = time.toLocaleTimeString('pt-Br', {minute: '2-digit', second: '2-digit'})
     timeOnScreen.innerHTML = `${formatedTime}`
 }
 
