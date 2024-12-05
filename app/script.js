@@ -88,7 +88,7 @@ function changeContext(context) {
 const timer = () => {
     if (timeInSeconds <= 0) {
         soundBeep.play();
-        alert('Time finished!')
+        Swal.fire("Time finished!");
         reset()
         return
     }
